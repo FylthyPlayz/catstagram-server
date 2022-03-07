@@ -1,0 +1,9 @@
+[
+    {
+        "model": "catstagramapi.tag",
+        "pk": 1,
+        "fields": {
+            "label": "Funny"
+        }
+    }
+]
