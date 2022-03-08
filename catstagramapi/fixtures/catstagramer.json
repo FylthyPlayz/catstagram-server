@@ -1,0 +1,10 @@
+[
+    {
+        "model": "catstagramapi.catstagramer",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "bio": "I am the best kicker in the league. JK."
+        }
+    }
+]

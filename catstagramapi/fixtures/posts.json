@@ -1,0 +1,13 @@
+[
+    {
+        "model": "catstagramapi.post",
+        "pk": 1,
+        "fields": {
+            "image": null,
+            "publication_date": "2022-03-08",
+            "content": "What in the world is Snickers doing this morning?",
+            "user": 1,
+            "tags": [1]
+        }
+    }
+]
