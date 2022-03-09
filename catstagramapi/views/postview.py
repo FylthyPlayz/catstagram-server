@@ -17,9 +17,9 @@ class PostViewSet(ViewSet):
     def list(self, request):
         posts = Post.objects.all()
         # posts = Post.objects.order_by('-publication_date')
-        tag = PostTag.query_params.get('tag', None)
-        if tag is not None:
-            posts = posts.filter(tag_id=tag)
+        # tag = PostTag.query_params.get('tag', None)
+        # if tag is not None:
+        #     posts = posts.filter(tag_id=tag)
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data)
 

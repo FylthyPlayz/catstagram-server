@@ -1,5 +1,5 @@
-# import base64
-# import uuid
+import base64
+import uuid
 from django.http import HttpResponseServerError
 from django.core.exceptions import ValidationError
 from django.core.files.base import ContentFile
@@ -41,6 +41,11 @@ class CatstagramerView(ViewSet):
             Response -- JSON serialized catstagramer instance
         """
         catstagramer = Catstagramer.objects.get(user=request.auth.user)
+        format, imgstr = request.data["post_image"].split(';base64,')
+        ext = format.split('/')[-1]
+        data = ContentFile(base64.b64decode(imgstr), name=f'{request}-{uuid.uuid4()}.{ext}')
+        catstagramer.post_image = data
+        catstagramer.save()
         try:
             serializer = CreateCatstagramerSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)      
@@ -56,12 +61,11 @@ class CatstagramerView(ViewSet):
         """
         try:
             catstagramer = Catstagramer.objects.get(pk=pk)
-            # format, imgstr = request.data["profile_image_url"].split(';base64,')
-            # ext = format.split('/')[-1]
-            # data = ContentFile(base64.b64decode(imgstr), name=f'{pk}-{uuid.uuid4()}.{ext}')
-            # catstagramer.profile_image_url = data
-            # catstagramer.save()
-
+            format, imgstr = request.data["post_image"].split(';base64,')
+            ext = format.split('/')[-1]
+            data = ContentFile(base64.b64decode(imgstr), name=f'{pk}-{uuid.uuid4()}.{ext}')
+            catstagramer.post_image = data
+            catstagramer.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)
