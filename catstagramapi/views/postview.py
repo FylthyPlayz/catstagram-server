@@ -1,5 +1,8 @@
+import base64
+import uuid
 from django.http import HttpResponseServerError
 from django.core.exceptions import ValidationError
+from django.core.files.base import ContentFile
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
@@ -26,9 +29,12 @@ class PostViewSet(ViewSet):
     def create(self, request):
         catstagramer = Catstagramer.objects.get(user=request.auth.user)
         try:
+            format, imgstr = request.data["image"].split(';base64,')
+            ext = format.split('/')[-1]
+            data = ContentFile(base64.b64decode(imgstr), name=f'media/{catstagramer.user.username}-{uuid.uuid4()}.{ext}')
             serializer = CreatePostSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
-            serializer.save(user=catstagramer)
+            serializer.save(user=catstagramer, image=data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)
@@ -36,7 +42,12 @@ class PostViewSet(ViewSet):
     def update(self, request, pk):
         try:
             post = Post.objects.get(pk=pk)
+            format, imgstr = request.data["image"].split(';base64,')
+            ext = format.split('/')[-1]
+            data = ContentFile(base64.b64decode(imgstr), name=f'media/{pk}-{uuid.uuid4()}.{ext}')
             serializer = CreatePostSerializer(post, data=request.data)
+            post.post_image = data
+            post.save()
             serializer.is_valid(raise_exception=True)
             post = serializer.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
@@ -57,4 +68,4 @@ class PostSerializer(serializers.ModelSerializer):
 class CreatePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['id', 'image', 'publication_date', 'content', 'user', 'tag']
+        fields = ['id', 'publication_date', 'content', 'user', 'tags']
