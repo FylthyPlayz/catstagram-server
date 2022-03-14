@@ -16,18 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 from rest_framework import routers
 from catstagramapi.views import register_user, login_user
-from catstagramapi.views import PostViewSet, TagView
+from catstagramapi.views import PostViewSet, TagView, CatstagramerView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'posts', PostViewSet, 'post')
 router.register(r'tags', TagView, 'tag')
+router.register(r'users', CatstagramerView, 'user')
 
 urlpatterns = [
     path('register', register_user),
     path('login', login_user),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-    path('', include (router.urls)),
-]
+    path('', include (router.urls)), 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

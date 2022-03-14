@@ -5,5 +5,39 @@
         "fields": {
             "label": "Funny"
         }
+    },
+    {
+        "model": "catstagramapi.tag",
+        "pk": 2,
+        "fields": {
+            "label": "Liquid"
+        }
+    },
+    {
+        "model": "catstagramapi.tag",
+        "pk": 3,
+        "fields": {
+            "label": "Bread"
+        }
+    },
+    {
+        "model": "catstagramapi.tag",
+        "pk": 4,
+        "fields": {
+            "label": "Squished"
+        }
+    },
+    {
+        "model": "catstagramapi.tag",
+        "pk": 5,
+        "fields": {
+            "label": "Hangry"
+        }
+    },{
+        "model": "catstagramapi.tag",
+        "pk": 6,
+        "fields": {
+            "label": "Zoomies"
+        }
     }
 ]
