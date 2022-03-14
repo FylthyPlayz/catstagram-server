@@ -1,8 +1,6 @@
-import base64
-import uuid
+
 from django.http import HttpResponseServerError
 from django.core.exceptions import ValidationError
-from django.core.files.base import ContentFile
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
@@ -41,10 +39,6 @@ class CatstagramerView(ViewSet):
             Response -- JSON serialized catstagramer instance
         """
         catstagramer = Catstagramer.objects.get(user=request.auth.user)
-        format, imgstr = request.data["post_image"].split(';base64,')
-        ext = format.split('/')[-1]
-        data = ContentFile(base64.b64decode(imgstr), name=f'{request}-{uuid.uuid4()}.{ext}')
-        catstagramer.post_image = data
         catstagramer.save()
         try:
             serializer = CreateCatstagramerSerializer(data=request.data)
@@ -61,10 +55,6 @@ class CatstagramerView(ViewSet):
         """
         try:
             catstagramer = Catstagramer.objects.get(pk=pk)
-            format, imgstr = request.data["post_image"].split(';base64,')
-            ext = format.split('/')[-1]
-            data = ContentFile(base64.b64decode(imgstr), name=f'{pk}-{uuid.uuid4()}.{ext}')
-            catstagramer.post_image = data
             catstagramer.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ex:
@@ -80,10 +70,10 @@ class CatstagramerSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = Catstagramer
-        fields = ('id', 'user', 'bio', 'created_on', 'active', 'superuser')
-        depth = 1
+        fields = ('id', 'user', 'bio')
+        depth = 2
         
 class CreateCatstagramerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Catstagramer
-        fields = ['id', 'bio', 'created_on', 'active', 'superuser']
+        fields = ['id', 'user', 'bio']
