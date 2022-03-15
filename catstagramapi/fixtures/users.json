@@ -8,7 +8,9 @@
             "first_name": "Randy",
             "last_name": "Bullock",
             "email": "ThiccKicker@email.com",
-            "is_staff": true
+            "is_staff": true,
+            "is_superuser": false,
+            "is_active": true
         }
     }
 ]

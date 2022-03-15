@@ -5,6 +5,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from catstagramapi.models import Catstagramer
+from django.contrib.auth.models import User
 
 
 class CatstagramerView(ViewSet):
@@ -55,6 +56,12 @@ class CatstagramerView(ViewSet):
         """
         try:
             catstagramer = Catstagramer.objects.get(pk=pk)
+            user = User.objects.get(pk=pk)
+            user.username = request.data["username"]
+            user.first_name = request.data["first_name"]
+            user.last_name = request.data["last_name"]
+            catstagramer.bio = request.data["bio"]
+            user.save()
             catstagramer.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ex:
