@@ -2,9 +2,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from catstagramapi.models import Tag, PostTag
-from django.core.exceptions import ValidationError
-from rest_framework.decorators import action
+from catstagramapi.models import Tag
 
 class TagView(ViewSet):
     def retrieve(self, request, pk):

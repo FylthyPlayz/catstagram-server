@@ -6,7 +6,7 @@ from django.core.files.base import ContentFile
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from catstagramapi.models import Post, PostTag, Catstagramer, Tag
+from catstagramapi.models import Post, Catstagramer, Tag
 
 class PostViewSet(ViewSet):
     def retrieve(self, request, pk):
@@ -34,7 +34,8 @@ class PostViewSet(ViewSet):
         try:
             format, imgstr = request.data["image"].split(';base64,')
             ext = format.split('/')[-1]
-            data = ContentFile(base64.b64decode(imgstr), name=f'media/{catstagramer.user.username}-{uuid.uuid4()}.{ext}')
+            data = ContentFile(base64.b64decode(imgstr), 
+            name=f'media/{catstagramer.user.username}-{uuid.uuid4()}.{ext}')
             serializer = CreatePostSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save(user=catstagramer, image=data, tags=tags)
@@ -48,7 +49,8 @@ class PostViewSet(ViewSet):
             post = Post.objects.get(pk=pk)
             format, imgstr = request.data["image"].split(';base64,')
             ext = format.split('/')[-1]
-            data = ContentFile(base64.b64decode(imgstr), name=f'media/{catstagramer.user.username}-{uuid.uuid4()}.{ext}')
+            data = ContentFile(base64.b64decode(imgstr), 
+            name=f'media/{catstagramer.user.username}-{uuid.uuid4()}.{ext}')
             serializer = CreatePostSerializer(post, data=request.data)
             # post.post_image = data
             serializer.is_valid(raise_exception=True)
