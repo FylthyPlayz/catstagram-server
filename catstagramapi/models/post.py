@@ -7,3 +7,4 @@ class Post(models.Model):
     content = models.TextField()
     user = models.ForeignKey("Catstagramer", on_delete=models.CASCADE)
     tags = models.ManyToManyField("Tag", through="PostTag")
+    # likes = models.ForeignKey("Like", on_delete=models.CASCADE)

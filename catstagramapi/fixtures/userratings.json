@@ -7,5 +7,23 @@
             "post": 1,
             "rating": 9
         }
+    },
+    {
+        "model": "catstagramapi.userratings",
+        "pk": 2,
+        "fields": {
+            "user": 3,
+            "post": 15,
+            "rating": 8
+        }
+    },
+    {
+        "model": "catstagramapi.userratings",
+        "pk": 3,
+        "fields": {
+            "user": 4,
+            "post": 15,
+            "rating": 6
+        }
     }
 ]
