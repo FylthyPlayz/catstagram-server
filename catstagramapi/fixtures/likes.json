@@ -1,0 +1,26 @@
+[
+    {
+        "model": "catstagramapi.like",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "post": 15
+        }
+    },
+    {
+        "model": "catstagramapi.like",
+        "pk": 2,
+        "fields": {
+            "user": 3,
+            "post": 15
+        }
+    },
+    {
+        "model": "catstagramapi.like",
+        "pk": 3,
+        "fields": {
+            "user": 4,
+            "post": 15
+        }
+    }
+]
