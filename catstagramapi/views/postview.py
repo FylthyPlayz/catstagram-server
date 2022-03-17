@@ -20,7 +20,7 @@ class PostViewSet(ViewSet):
 
     def list(self, request):
         posts = Post.objects.all()
-        # posts = Post.objects.order_by('-publication_date')
+        posts = Post.objects.order_by('-publication_date')
         # tag = PostTag.query_params.get('tag', None)
         # if tag is not None:
         #     posts = posts.filter(tag_id=tag)
@@ -51,14 +51,16 @@ class PostViewSet(ViewSet):
             tags = []
             for tag in request.data['tags']:
                 tags.append(Tag.objects.get(pk=tag))
-            format, imgstr = request.data["image"].split(';base64,')
-            ext = format.split('/')[-1]
-            data = ContentFile(base64.b64decode(imgstr), 
-            name=f'media/{catstagramer.user.username}-{uuid.uuid4()}.{ext}')
             serializer = CreatePostSerializer(post, data=request.data)
-            # post.post_image = data
             serializer.is_valid(raise_exception=True)
-            post = serializer.save(user=catstagramer, image=data, tags=tags)
+            if request.data["image"]: 
+                format, imgstr = request.data["image"].split(';base64,')
+                ext = format.split('/')[-1]
+                data = ContentFile(base64.b64decode(imgstr), 
+                name=f'media/{catstagramer.user.username}-{uuid.uuid4()}.{ext}')
+                post = serializer.save(user=catstagramer, image=data, tags=tags)
+            else: 
+                serializer.save(user=catstagramer, tags=tags)
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)

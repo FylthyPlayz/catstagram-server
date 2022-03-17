@@ -69,7 +69,9 @@ class CatstagramerView(ViewSet):
 
     def destroy(self, request, pk):
         catstagramer = Catstagramer.objects.get(pk=pk)
+        user = User.objects.get(pk=pk)
         catstagramer.delete()
+        user.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)       
 
 class CatstagramerSerializer(serializers.ModelSerializer):
