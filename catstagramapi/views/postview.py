@@ -48,6 +48,9 @@ class PostViewSet(ViewSet):
         try:
             catstagramer = Catstagramer.objects.get(user=request.auth.user)
             post = Post.objects.get(pk=pk)
+            tags = []
+            for tag in request.data['tags']:
+                tags.append(Tag.objects.get(pk=tag))
             format, imgstr = request.data["image"].split(';base64,')
             ext = format.split('/')[-1]
             data = ContentFile(base64.b64decode(imgstr), 
@@ -55,7 +58,7 @@ class PostViewSet(ViewSet):
             serializer = CreatePostSerializer(post, data=request.data)
             # post.post_image = data
             serializer.is_valid(raise_exception=True)
-            post = serializer.save(user=catstagramer, image=data)
+            post = serializer.save(user=catstagramer, image=data, tags=tags)
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)
