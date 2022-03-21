@@ -47,8 +47,3 @@ class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = ('id', 'label')
-
-class CreateTagSerializer(serializers.ModelSerializer):
-    class Meta:
-        model: Tag
-        fields = ['id', 'label']
