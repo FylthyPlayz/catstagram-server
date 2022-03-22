@@ -48,14 +48,14 @@ class LikeView(ViewSet):
         """Post request for a user to like a post"""
         catstagramer = Catstagramer.objects.get(user=request.auth.user)
         post = Post.objects.get(pk=pk)
-        post.like.like.add(catstagramer, post)
+        post.likes.add(catstagramer)
         return Response({'message': 'Post liked'}, status=status.HTTP_201_CREATED)
 
     @action(methods=['delete'], detail=True)
     def unlike(self, request, pk):
         catstagramer = Catstagramer.objects.get(user=request.auth.user)
         post = Post.objects.get(pk=pk)
-        post.like.remove(catstagramer)
+        post.likes.remove(catstagramer)
         return Response({'message': 'Post un-liked'}, status=status.HTTP_204_NO_CONTENT)
 
 class LikeSerializer(serializers.ModelSerializer):

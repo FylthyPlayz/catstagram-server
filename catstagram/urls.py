@@ -29,12 +29,12 @@ router.register(r'posts', PostViewSet, 'post')
 router.register(r'tags', TagView, 'tag')
 router.register(r'users', CatstagramerView, 'user')
 router.register(r'ratings', RatingView, 'rating')
-router.register(r'posts/likes', LikeView, 'like')
+router.register(r'likes', LikeView, 'like')
 
 urlpatterns = [
     path('register', register_user),
     path('login', login_user),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-    path('', include (router.urls)), 
+    path('', include (router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

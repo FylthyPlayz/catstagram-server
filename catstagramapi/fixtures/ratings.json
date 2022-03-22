@@ -1,0 +1,72 @@
+[
+    {
+        "model": "catstagramapi.rating",
+        "pk": 1,
+        "fields": {
+            "rating": 1
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 2,
+        "fields": {
+            "rating": 2
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 3,
+        "fields": {
+            "rating": 3
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 4,
+        "fields": {
+            "rating": 4
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 5,
+        "fields": {
+            "rating": 5
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 6,
+        "fields": {
+            "rating": 6
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 6,
+        "fields": {
+            "rating": 7
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 6,
+        "fields": {
+            "rating": 8
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 6,
+        "fields": {
+            "rating": 9
+        }
+    },
+    {
+        "model": "catstagramapi.rating",
+        "pk": 6,
+        "fields": {
+            "rating": 10
+        }
+    }
+]
