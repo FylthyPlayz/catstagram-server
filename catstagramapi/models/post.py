@@ -2,9 +2,9 @@ from django.db import models
 
 
 class Post(models.Model):
-    image = models.ImageField(null=False)
+    image = models.ImageField(null=True)
     publication_date = models.DateField(auto_now_add=True)
     content = models.TextField()
     user = models.ForeignKey("Catstagramer", on_delete=models.CASCADE)
     tags = models.ManyToManyField("Tag", through="PostTag")
-    # likes = models.ForeignKey("Like", on_delete=models.CASCADE)
+    likes = models.ManyToManyField("Catstagramer", through="Like", related_name="likes")

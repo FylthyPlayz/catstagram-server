@@ -1,15 +1,15 @@
 [
     {
-        "model": "catstagramapi.userratings",
+        "model": "catstagramapi.userrating",
         "pk": 1,
         "fields": {
             "user": 1,
-            "post": 1,
+            "post": 15,
             "rating": 9
         }
     },
     {
-        "model": "catstagramapi.userratings",
+        "model": "catstagramapi.userrating",
         "pk": 2,
         "fields": {
             "user": 3,
@@ -18,7 +18,7 @@
         }
     },
     {
-        "model": "catstagramapi.userratings",
+        "model": "catstagramapi.userrating",
         "pk": 3,
         "fields": {
             "user": 4,
