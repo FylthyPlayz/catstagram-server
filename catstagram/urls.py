@@ -23,12 +23,15 @@ from catstagramapi.views import register_user, login_user
 from catstagramapi.views import PostViewSet, TagView, CatstagramerView
 from catstagramapi.views.likeview import LikeView
 from catstagramapi.views.ratingview import RatingView
+from catstagramapi.views.userratingview import UserRatingView
+
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'posts', PostViewSet, 'post')
 router.register(r'tags', TagView, 'tag')
 router.register(r'users', CatstagramerView, 'user')
 router.register(r'ratings', RatingView, 'rating')
+router.register(r'userratings', UserRatingView, 'userrating')
 router.register(r'likes', LikeView, 'like')
 
 urlpatterns = [

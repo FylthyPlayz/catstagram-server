@@ -62,6 +62,7 @@ class CatstagramerView(ViewSet):
             user.last_name = request.data["last_name"]
             catstagramer.bio = request.data["bio"]
             catstagramer.save()
+            user.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_400_BAD_REQUEST)
