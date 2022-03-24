@@ -8,3 +8,12 @@ class Post(models.Model):
     user = models.ForeignKey("Catstagramer", on_delete=models.CASCADE)
     tags = models.ManyToManyField("Tag", through="PostTag")
     likes = models.ManyToManyField("Catstagramer", through="Like", related_name="likes")
+
+
+    @property
+    def joined(self):
+        return self.__joined
+
+    @joined.setter
+    def joined(self, value):
+        self.__joined = value

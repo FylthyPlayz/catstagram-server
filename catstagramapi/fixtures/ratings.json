@@ -43,28 +43,28 @@
     },
     {
         "model": "catstagramapi.rating",
-        "pk": 6,
+        "pk": 7,
         "fields": {
             "rating": 7
         }
     },
     {
         "model": "catstagramapi.rating",
-        "pk": 6,
+        "pk": 8,
         "fields": {
             "rating": 8
         }
     },
     {
         "model": "catstagramapi.rating",
-        "pk": 6,
+        "pk": 9,
         "fields": {
             "rating": 9
         }
     },
     {
         "model": "catstagramapi.rating",
-        "pk": 6,
+        "pk": 10,
         "fields": {
             "rating": 10
         }
